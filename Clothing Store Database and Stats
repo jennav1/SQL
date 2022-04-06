@@ -1,0 +1,22 @@
+CREATE TABLE clothing_store (id INTEGER PRIMARY KEY, brand TEXT, type TEXT, section TEXT, quantity INTEGER, aisle INTEGER, price INTEGER);
+INSERT INTO clothing_store VALUES 
+(1, "Nike", "shoes", "women", 150, 7, 10.00),
+(2, "Nike", "shoes", "men", 150, 14, 20.00),
+(3, "Levi's", "pants", "women", 500, 2, 12.00),
+(4, "Levi's", "pants", "men", 500, 9, 12.00),
+(5, "Fruit of Loom", "socks", "men", 200, 13, 5.00),
+(6, "Hanes", "undergarments", "men", 250, 12, 15.00),
+(7, "Wrangler", "pants", "women", 400, 2, 12.00),
+(8, "Wrangler", "pants", "men", 350, 9, 12.00),
+(9, "Sketchers", "shoes", "women", 150, 8, 20.00),
+(10, "Sketchers", "shoes", "men", 130, 14, 20.00),
+(11, "Old Navy", "shirts", "women", 600, 1, 11.00),
+(12, "Old Navy", "shirts", "men", 630, 8, 11.00),
+(13, "Chanel", "dresses", "women", 30, 3, 50.00), 
+(14, "Playtex", "undergarments", "women", 100, 5, 15.00),
+(15, "Adidas", "socks", "women", 120, 6, 5.00);
+
+SELECT price, SUM(quantity) FROM clothing_store GROUP BY PRICE;
+
+SELECT type, AVG(price) FROM clothing_store
+GROUP BY type;
