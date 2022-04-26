@@ -1,4 +1,7 @@
+#Create a clothing store database
+
 CREATE TABLE clothing_store (id INTEGER PRIMARY KEY, brand TEXT, type TEXT, section TEXT, quantity INTEGER, aisle INTEGER, price INTEGER);
+
 INSERT INTO clothing_store VALUES 
 (1, "Nike", "shoes", "women", 150, 7, 10.00),
 (2, "Nike", "shoes", "men", 150, 14, 20.00),
@@ -16,7 +19,27 @@ INSERT INTO clothing_store VALUES
 (14, "Playtex", "undergarments", "women", 100, 5, 15.00),
 (15, "Adidas", "socks", "women", 120, 6, 5.00);
 
-SELECT price, SUM(quantity) FROM clothing_store GROUP BY PRICE;
+# Display the databse ordered by price.
+SELECT *
+FROM clothing_store
+ORDER BY price
 
-SELECT type, AVG(price) FROM clothing_store
-GROUP BY type;
+# Order the clothing items by price.
+SELECT price, SUM(quantity) 
+FROM clothing_store 
+GROUP BY price;
+
+# How much was the total spent for the store?
+SELECT SUM(quantity*price) AS total_spent
+FROM clothing_store;
+
+# Which clothing brand was bought the most?
+SELECT brand, SUM(quantity)*price AS max_spent
+FROM clothing_store
+GROUP BY price
+ORDER BY max_spent DESC
+LIMIT 1;
+
+# What is the average amount spent per type of clothing?
+SELECT type, AVG(quantity*price) 
+FROM clothing_store;
