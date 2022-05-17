@@ -1,4 +1,4 @@
---#1. Show Customers who are not in the US.--
+--#1. Show Customers (CustomerId, FirstName, LastName, and Country) from the customers Table who are not in the US.--
 SELECT CustomerId, FirstName, LastName, Country
 FROM chinook.customers
 WHERE Country !='USA';
@@ -8,7 +8,7 @@ SELECT *
 FROM chinook.customers
 WHERE Country = 'Brazil';
 
---#3. Find the invoices of customers who are from Brazil.--
+--#3. Find the invoices of customers who are from Brazil. Show the customer's fullname, Invoice ID, Date of the invoice, and billing country.--
 SELECT c.FirstName, c.LastName, i.InvoiceId, i.InvoiceDate, i.BillingCountry
 FROM chinook.invoices i
 LEFT JOIN chinook.customers c ON i.CustomerId = c.CustomerId
@@ -35,7 +35,7 @@ FROM chinook.invoices i
 JOIN chinook.customers c ON i.customerId= c.customerId
 JOIN chinook.employees e ON c.supportRepId = e.EmployeeId;
 
---#8 How many Invoices were there in 2009?--
+--#8 A query that counts how many Invoices were there in 2009 from the invoice table.--
 SELECT COUNT(*)
 FROM chinook.invoices
 WHERE InvoiceDate LIKE '%2009%';
