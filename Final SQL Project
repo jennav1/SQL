@@ -1,3 +1,5 @@
+#In this SQL, I am querying a database with multiple tables in it to quantify statistics about customer and music media sales data.
+
 --#1. Show Customers (CustomerId, FirstName, LastName, and Country) from the customers Table who are not in the US.--
 SELECT CustomerId, FirstName, LastName, Country
 FROM chinook.customers
@@ -23,7 +25,7 @@ WHERE Title LIKE '%Agent';
 SELECT DISTINCT BillingCountry
 FROM chinook.invoices;
 
---#6. Provide a query that shows the invoices associated with each sales agent.--
+--#6. Provide a query that shaudiows the invoices associated with each sales agent.--
 SELECT e.EmployeeId, e.FirstName, e.LastName, i.InvoiceId
 FROM chinook.employees e
 JOIN chinook.customers c ON e.EmployeeId = c.SupportRepId
@@ -50,7 +52,7 @@ SELECT ii.*, t.Name AS Track_Name
 FROM chinook.invoice_items ii
 LEFT JOIN chinook.tracks t ON ii.TrackId = t.TrackId;
 
---#11 Write a query that includes the purchased track name and artist namme with each invoice line item.--
+--#11 Write a query that includes the purchased track name and artist name with each invoice line item.--
 SELECT ii.*, t.Name AS Track_Name, ar.Name AS Artist_Name
 FROM chinook.invoice_items ii
 LEFT JOIN chinook.tracks t ON ii.TrackId = t.TrackId
