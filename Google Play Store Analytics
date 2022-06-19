@@ -1,0 +1,92 @@
+# For this project, I downloaded Google Play Store data from Kaggle.
+# Then I created a table to insert Google Play Store data into.
+# Finally, I performed analytics on the data using SQL. 
+
+CREATE TABLE BIT_DB.googleplaystore (
+App varchar NOT NULL,
+Category varchar NOT NULL,
+Rating decimal(2,1) NOT NULL,
+Reviews integer NOT NULL,
+Size varchar NOT NULL,
+Installs varchar NOT NULL,
+Type varchar NOT NULL,
+Price integer NOT NULL,
+Content_Rating varchar NOT NULL,
+Genres varchar NOT NULL,
+Last_Updated varchar NOT NULL,
+Current_Ver varchar NOT NULL,
+Android_Ver varhcar NOT NULL
+);
+
+--#1 Select all columns and rows from the googleplaystore table in the BIT_DB database.-- 
+SELECT *
+FROM BIT_DB.googleplaystore;
+
+--#2 Count how many Apps there is of each rating by grouping the data by the Rating column and order the results by rating in Ascending order.--
+SELECT COUNT(App), Rating
+FROM BIT_DB.googleplaystore
+GROUP BY Rating
+ORDER BY Rating ASC;
+
+--#3 Select the App with the lowest rating.--
+SELECT App, MIN(Rating)
+FROM BIT_DB.googleplaystore;
+
+--#4 Select the App with the highest rating.--
+SELECT APP, MAX(Rating)
+FROM BIT_DB.googleplaystore
+WHERE Rating IS NOT 'NaN';
+
+--#5 Select the top 10 Apps with the most installs.-- 
+SELECT App, Installs
+FROM BIT_DB.googleplaystore
+ORDER BY Installs DESC
+LIMIT 10;
+
+--#6 Select the App with the least installs.--
+SELECT App, Installs
+FROM BIT_DB.googleplaystore
+ORDER BY Installs ASC
+LIMIT 1;
+
+--#7 Count how many Apps there is of each category and list the types of categories.--
+SELECT COUNT(App), Category
+FROM BIT_DB.googleplaystore
+GROUP BY Category
+ORDER BY Category ASC;
+
+--#8 Select the App with the most reviews.--
+SELECT APP, Reviews
+FROM BIT_DB.googleplaystore
+ORDER BY Reviews DESC
+LIMIT 1;
+
+--#9 Select the App with the least reviews.--
+SELECT APP, Reviews
+FROM BIT_DB.googleplaystore
+ORDER BY Reviews ASC
+LIMIT 1;
+
+--#10 Select what apps and what type of apps which have 500,000,000 or more installs.--  
+SELECT App, Type, Installs
+FROM BIT_DB.googleplaystore
+WHERE Installs ='500,000,000+';
+
+--#11 Select how many apps are free and how many are paid.--
+SELECT COUNT(App), Type, MAX(Price)
+FROM BIT_DB.googleplaystore
+GROUP BY TYPE;
+
+--#12 Select the app that costs the most and how much it costs in the app store.--
+SELECT App, MAX(Price)
+FROM BIT_DB.googleplaystore;
+
+--#13 Select all apps that were last updated in 2018.--
+SELECT App, Last_Updated
+FROM BIT_DB.googleplaystore
+WHERE Last_Updated LIKE '%18';
+
+--#14 What rating did the app Tik Tok get and how many installs.--
+SELECT App, Rating, Installs
+FROM BIT_DB.googleplaystore
+WHERE App LIKE 'Tik Tok%';
