@@ -1,17 +1,19 @@
---Query a list of CITY and STATE from the STATION table.--
+In this SQL code, I'm querying a database that's holding Weather Station data to answer questions about the data.
+
+--#1. Query a list of CITY and STATE from the STATION table.--
 SELECT CITY, STATE
 FROM STATION;
 
---Query a list of CITY names from STATION for cities that have an even ID number. Print the results in any order, but exclude duplicates from the answer.--
+--#2. Query a list of CITY names from STATION for cities that have an even ID number. Print the results in any order, but exclude duplicates from the answer.--
 SELECT DISTINCT CITY
 FROM STATION
 WHERE ID %2=0;
 
---Find the difference between the total number of CITY entries in the table and the number of distinct CITY entries in the table.--
+--#3. Find the difference between the total number of CITY entries in the table and the number of distinct CITY entries in the table.--
 SELECT (COUNT(CITY)-COUNT(DISTINCT CITY))
 FROM STATION;
 
---Query the two cities in STATION with the shortest and longest CITY names, as well as their respective length.--
+--#4. Query the two cities in STATION with the shortest and longest CITY names, as well as their respective length.--
 (SELECT CITY, LENGTH(CITY)
 FROM STATION
 ORDER BY LENGTH(CITY) ASC, CITY ASC
@@ -22,77 +24,77 @@ FROM STATION
 ORDER BY LENGTH(CITY) DESC, CITY DESC
 LIMIT 1);
 
---Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates.--
+--#5. Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates.--
 SELECT DISTINCT CITY
 FROM STATION
 WHERE SUBSTR(CITY,1,1) IN ('A','E','I','O','U')
 ORDER BY CITY ASC;
 
---Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates.--
+--#6. Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates.--
 SELECT DISTINCT CITY
 FROM STATION
 WHERE SUBSTR(CITY,-1,1) IN ('a','e','i','o','u')
 ORDER BY CITY ASC;
 
---Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters. Your result cannot contain duplicates.--
+--#7. Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters. Your result cannot contain duplicates.--
 SELECT DISTINCT CITY
 FROM STATION
 WHERE UPPER(SUBSTR(CITY,1,1)) IN ('a','e','i','o','u')
 AND SUBSTR(CITY,-1,1) IN ('a','e','i','o','u')
 ORDER BY CITY ASC;
 
---Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.--
+--#8. Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.--
 SELECT DISTINCT CITY
 FROM STATION
 WHERE SUBSTR(CITY,1,1) NOT IN ('A','E','I','O','U')
 ORDER BY CITY ASC;
 
---Query the list of CITY names from STATION that do not end with vowels. Your result cannot contain duplicates.--
+--#9. Query the list of CITY names from STATION that do not end with vowels. Your result cannot contain duplicates.--
 SELECT DISTINCT CITY
 FROM STATION
 WHERE SUBSTR(CITY,-1,1) NOT IN ('a','e','i','o','u')
 ORDER BY CITY ASC;
 
---Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels. Your result cannot contain duplicates.--
+--#10. Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels. Your result cannot contain duplicates.--
 SELECT DISTINCT CITY
 FROM STATION
 WHERE SUBSTR(CITY,1,1) NOT IN ('A','E','I','O','U')
 OR SUBSTR(CITY,-1,1) NOT IN ('a','e','i','o','u');
 
---Query the list of CITY names from STATION that do not start with vowels and do not end with vowels. Your result cannot contain duplicates.--
+--#11. Query the list of CITY names from STATION that do not start with vowels and do not end with vowels. Your result cannot contain duplicates.--
 SELECT DISTINCT CITY
 FROM STATION
 WHERE SUBSTR(CITY,1,1) NOT IN ('A','E','I','O','U')
 AND LOWER(SUBSTR(CITY,-1,1)) NOT IN ('A','E','I','O','U')
 ORDER BY CITY ASC;
 
---Query the following two values from the STATION table: the sum of all values in LAT_N rounded to a scale of 2 decimal places and the sum of all values in LONG_W rounded to a scale of 2 decimal places.--
+--#12. Query the following two values from the STATION table: the sum of all values in LAT_N rounded to a scale of 2 decimal places and the sum of all values in LONG_W rounded to a scale of 2 decimal places.--
 SELECT ROUND(SUM(LAT_N),2), ROUND(SUM(LONG_W),2)
 FROM STATION;
 
---Query the sum of Northern Latitudes (LAT_N) from STATION having values greater than 38.7880 and less than 137.2345. Truncate your answer to 4 decimal places.--
+--#13. Query the sum of Northern Latitudes (LAT_N) from STATION having values greater than 38.7880 and less than 137.2345. Truncate your answer to 4 decimal places.--
 SELECT ROUND(SUM(LAT_N),4)
 FROM STATION
 WHERE LAT_N BETWEEN 38.7880 AND 137.2345;
 
---Query the greatest value of the Northern Latitudes (LAT_N) from STATION that is less than 137.2345. Truncate your answer to 4 decimal places.--
+--#14. Query the greatest value of the Northern Latitudes (LAT_N) from STATION that is less than 137.2345. Truncate your answer to 4 decimal places.--
 SELECT ROUND(MAX(LAT_N),4)
 FROM STATION
 WHERE LAT_N < 137.2345;
 
---Query the smallest Northern Latitude (LAT_N) from STATION that is greater than 38.7780. Round your answer to 4 decimal places.--
+--#15. Query the smallest Northern Latitude (LAT_N) from STATION that is greater than 38.7780. Round your answer to 4 decimal places.--
 SELECT ROUND(LAT_N,4)
 FROM STATION
 WHERE LAT_N > 38.7780
 ORDER BY LAT_N ASC LIMIT 1;
 
---Query the Western Longitude (LONG_W)where the smallest Northern Latitude (LAT_N) in STATION is greater than 38.7780. Round your answer to 4 decimal places.--
+--#16. Query the Western Longitude (LONG_W)where the smallest Northern Latitude (LAT_N) in STATION is greater than 38.7780. Round your answer to 4 decimal places.--
 SELECT ROUND(LONG_W,4)
 FROM STATION
 WHERE LAT_N > 38.7780
 ORDER BY LAT_N ASC LIMIT 1;
 
---Consider P1(a,b) and P2(c,d) to be two points on a 2D plane.
+--#17. Consider P1(a,b) and P2(c,d) to be two points on a 2D plane.
  a happens to equal the minimum value in Northern Latitude (LAT_N in STATION).
  b happens to equal the minimum value in Western Longitude (LONG_W in STATION).
  c happens to equal the maximum value in Northern Latitude (LAT_N in STATION).
